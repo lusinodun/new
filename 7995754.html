@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ICANN root health : Installation manual (Hedgehog 2.0.0a1)</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">ICANN root health</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            ICANN root health : Installation manual (Hedgehog 2.0.0a1)
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+    
+            Created by <span class='author'> Sara Dickinson</span>, last modified on Aug 26, 2014
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h1 id="Installationmanual(Hedgehog2.0.0a1)-/*&lt;![CDATA[*/div.rbtoc1409130537941{padding:0px;}div.rbtoc1409130537941ul{list-style:disc;margin-left:0px;}div.rbtoc1409130537941li{margin-left:0px;padding-left:0px;}/*]]&gt;*/1.Installation1.1.Requirements1.1.1.Platformsu"><style type='text/css'>/*<![CDATA[*/
+div.rbtoc1409130537941 {padding: 0px;}
+div.rbtoc1409130537941 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1409130537941 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1409130537941'>
+<ul class='toc-indentation'>
+<li><a href='#Installationmanual(Hedgehog2.0.0a1)-Installation'>1. Installation</a>
+<ul class='toc-indentation'>
+<li><a href='#Installationmanual(Hedgehog2.0.0a1)-Requirements'>1.1. Requirements</a>
+<ul class='toc-indentation'>
+<li><a href='#Installationmanual(Hedgehog2.0.0a1)-Platformsupport'>1.1.1. Platform support</a></li>
+<li><a href='#Installationmanual(Hedgehog2.0.0a1)-Database'>1.1.2. Database</a></li>
+</ul>
+</li>
+<li><a href='#Installationmanual(Hedgehog2.0.0a1)-Hedgehogdependencies'>1.2. Hedgehog dependencies</a>
+<ul class='toc-indentation'>
+<li><a href='#Installationmanual(Hedgehog2.0.0a1)-Requiredpackages'>1.2.1. Required packages</a></li>
+<li><a href='#Installationmanual(Hedgehog2.0.0a1)-AdditionalRpackages'>1.2.2. Additional R packages</a></li>
+</ul>
+</li>
+<li><a href='#Installationmanual(Hedgehog2.0.0a1)-InstallHedgehog'>1.3. Install Hedgehog</a>
+<ul class='toc-indentation'>
+<li><a href='#Installationmanual(Hedgehog2.0.0a1)-Installandbuildcode'>1.3.1. Install and build code</a></li>
+<li><a href='#Installationmanual(Hedgehog2.0.0a1)-Systemusersandgroups'>1.3.2. System users and groups</a></li>
+<li><a href='#Installationmanual(Hedgehog2.0.0a1)-ConfigureHedgehog'>1.3.3. Configure Hedgehog</a></li>
+<li><a href='#Installationmanual(Hedgehog2.0.0a1)-Configureapache'>1.3.4. Configure apache</a></li>
+<li><a href='#Installationmanual(Hedgehog2.0.0a1)-Createandpopulatethedatabase'>1.3.5. Create and populate the database</a></li>
+<li><a href='#Installationmanual(Hedgehog2.0.0a1)-TesttheHedgehogfrontend'>1.3.6. Test the Hedgehog front end</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href='#Installationmanual(Hedgehog2.0.0a1)-RunningHedgehog'>2. Running Hedgehog</a>
+<ul class='toc-indentation'>
+<li><a href='#Installationmanual(Hedgehog2.0.0a1)-Importdata'>2.1. Import data</a>
+<ul class='toc-indentation'>
+<li><a href='#Installationmanual(Hedgehog2.0.0a1)-Importinghistorical.DATdata'>2.1.1. Importing historical .DAT data</a></li>
+<li><a href='#Installationmanual(Hedgehog2.0.0a1)-Importingreal-time.XMLdata'>2.1.2. Importing real-time .XML data</a>
+<ul class='toc-indentation'>
+<li><a href='#Installationmanual(Hedgehog2.0.0a1)-Manually'>2.1.2.1. Manually</a></li>
+<li><a href='#Installationmanual(Hedgehog2.0.0a1)-Automatically'>2.1.2.2. Automatically</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href='#Installationmanual(Hedgehog2.0.0a1)-Maintenance'>2.2. Maintenance</a>
+<ul class='toc-indentation'>
+<li><a href='#Installationmanual(Hedgehog2.0.0a1)-Cronjobs'>2.2.1. Cron jobs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div></h1><p>The following instructions describe how to install Hedgehog on Ubuntu 14.04 Server and set up imports of data.</p>    <div class="aui-message problem shadowed information-macro">
+                            <span class="aui-icon icon-problem">Icon</span>
+                <div class="message-content">
+                            <p>The server and PostgreSQL must both be configured to use UTC!</p>
+                    </div>
+    </div>
+<h1 id="Installationmanual(Hedgehog2.0.0a1)-Installation"><span class="nh-number">1. </span>Installation</h1><h2 id="Installationmanual(Hedgehog2.0.0a1)-Requirements"><span class="nh-number">1.1. </span>Requirements</h2><h3 id="Installationmanual(Hedgehog2.0.0a1)-Platformsupport"><span class="nh-number">1.1.1. </span>Platform support</h3><p>Version 2.0.0a1 of Hedgehog is currently only supported on Ubuntu 14.04 LTS Server.</p><h3 id="Installationmanual(Hedgehog2.0.0a1)-Database"><span class="nh-number">1.1.2. </span>Database</h3><p>Hedgehog has been tested with PostgreSQL 9.3.X</p><h2 id="Installationmanual(Hedgehog2.0.0a1)-Hedgehogdependencies"><span class="nh-number">1.2. </span>Hedgehog dependencies</h2><h3 id="Installationmanual(Hedgehog2.0.0a1)-Requiredpackages"><span class="nh-number">1.2.1. </span>Required packages</h3><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="theme: Midnight; brush: bash; gutter: false" style="font-size:12px;">sudo add-apt-repository ppa:opencpu/rapache
+sudo apt-get update
+sudo apt-get install r-base r-base-core r-base-dev libcairo2-dev libxt-dev r-cran-ggplot2 r-cran-dbi \
+                     r-cran-cairodevice r-cran-reshape r-cran-digest postgresql postgresql-client \
+                     postgresql-server-dev-9.3 postgresql-contrib pgbouncer libboost-all-dev libtool \
+                     libpqxx-dev apache2-mpm-prefork apache2-prefork-dev git libapache2-mod-r-base</pre>
+</div></div><p> </p><h3 id="Installationmanual(Hedgehog2.0.0a1)-AdditionalRpackages"><span class="nh-number">1.2.2. </span>Additional R packages</h3><p>Some R packages are needed that are not available through apt, they can be installed via R.</p><p>You will be prompted to choose a mirror site, or you can specify a repo by using a command of the form</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="theme: Midnight; brush: bash; gutter: false" style="font-size:12px;">install.packages(&quot;name&quot;, repos=&#39;http://cran.rstudio.com/&#39;)</pre>
+</div></div><p>Install:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="theme: Midnight; brush: bash; gutter: false" style="font-size:12px;">sudo R
+install.packages(c(&quot;brew&quot;,&quot;Cairo&quot;,&quot;googleVis&quot;,&quot;RPostgreSQL&quot;,&quot;R.utils&quot;,&quot;yaml&quot;))
+q()</pre>
+</div></div><p><span>The package versions that Hedgehog has been tested against are listed below alongside each package.</span></p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh">R Package</th><th class="confluenceTh">Supported Version</th></tr><tr><td class="confluenceTd">brew</td><td class="confluenceTd">1.0-6</td></tr><tr><td class="confluenceTd">Cairo</td><td class="confluenceTd">1.5.6</td></tr><tr><td class="confluenceTd">googleVis</td><td class="confluenceTd">0.5.5</td></tr><tr><td colspan="1" class="confluenceTd">RPostgreSQL</td><td colspan="1" class="confluenceTd">0.4</td></tr><tr><td colspan="1" class="confluenceTd">R.utils</td><td colspan="1" class="confluenceTd">1.32.4</td></tr><tr><td colspan="1" class="confluenceTd">yaml</td><td colspan="1" class="confluenceTd">2.1.13</td></tr></tbody></table></div><p> </p><h2 id="Installationmanual(Hedgehog2.0.0a1)-InstallHedgehog"><span class="nh-number">1.3. </span>Install Hedgehog</h2><h3 id="Installationmanual(Hedgehog2.0.0a1)-Installandbuildcode"><span class="nh-number">1.3.1. </span>Install and build code</h3><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="theme: Midnight; brush: bash; gutter: false" style="font-size:12px;">git clone https://github.com/dns-stats/hedgehog.git
+cd hedgehog
+git checkout tags/2.0.0a1
+./autogen.sh
+mkdir build
+cd build
+../configure
+make
+sudo make install
+cd</pre>
+</div></div>    <div class="aui-message hint shadowed information-macro">
+                            <span class="aui-icon icon-hint">Icon</span>
+                <div class="message-content">
+                            <p>If no &lt;prefix&gt; is specified in <em>configure</em> then it defaults to <em>/usr/local/</em></p>
+                    </div>
+    </div>
+    <div class="aui-message warning shadowed information-macro">
+                            <span class="aui-icon icon-warning">Icon</span>
+                <div class="message-content">
+                            <p>For large installations it may be preferable to store the data files on a separate partition to the database. See the *User guide for an overview of the Hedgehog directory structure.</p><p>In this case you may wish to mount a disk here or make use of a symbolic link at this stage of the installation.</p>
+                    </div>
+    </div>
+<p> </p><h3 id="Installationmanual(Hedgehog2.0.0a1)-Systemusersandgroups"><span class="nh-number">1.3.2. </span>System users and groups</h3><p>Two system users are required for Hedgehog:</p><ul style="list-style-type: square;"><li>Database owner - this is user that will own the database created by hedgehog and the top level datafile directories (default user in this example is 'hedgehog')</li><li>Read user - this should be the apache user which requires only read access to the database (default apache user in this example is called 'www-data')</li></ul><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="theme: Midnight; brush: bash; gutter: false" style="font-size:12px;"># create a system user and group called hedgehog
+sudo addgroup --system hedgehog
+sudo adduser --system --ingroup hedgehog hedgehog
+# put www-data user in group hedgehog
+sudo adduser www-data hedgehog
+# put hedgehog user in group www-data
+sudo adduser hedgehog www-data</pre>
+</div></div><p> </p><h3 id="Installationmanual(Hedgehog2.0.0a1)-ConfigureHedgehog"><span class="nh-number">1.3.3. </span>Configure Hedgehog</h3><ul><li>Edit the <em>&lt;prefix&gt;/etc/hedgehog/hedgehog.yaml</em> configuration file to make sure the user names match the users specified in the previous step. </li><li>Also configure the database parameters (port, name) as required. (Note a limitation of 2.0 is that the database and web front end must run on the same machine)</li></ul><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="theme: Midnight; brush: bash; gutter: false" style="font-size:12px;">database: 
+  port         : 5432      # specify port for the postgresql DB.
+  name         : hedgehog  # specify dbname for the postgresql DB.
+  owner        : hedgehog  # specify an owner for the postgresql DB. This user will also run refile_and_grok
+  read_user    : www-data  # specify a read user for the postgresql DB. This is typically the apache user.</pre>
+</div></div>    <div class="aui-message problem shadowed information-macro">
+                            <span class="aui-icon icon-problem">Icon</span>
+                <div class="message-content">
+                            <p><span>Do not edit the 'directories' section of this file as in 2.0 it is auto-generated.</span></p>
+                    </div>
+    </div>
+<p> </p><ul><li>Change the ownership of the 'data' directory specified in the '<span>directories</span>' section of the configuration file so it is owned by the same user as the database, so for example in a default install:</li></ul><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="theme: Midnight; brush: bash; gutter: false" style="font-size:12px;">sudo chown -R hedgehog:hedgehog &lt;prefix&gt;/var/hedgehog/</pre>
+</div></div><p> </p><ul><li>Also check the parameters in the <em>&lt;prefix&gt;/share/hedgehog/conf/hedgehog_gui.yaml</em> file, which specifies parameters controlling the behaviour of the web front end. See the &quot;Plot Caching&quot; section in the user guide for a more detailed description of when plots are cached.</li></ul><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="theme: Midnight; brush: bash; gutter: false" style="font-size:12px;">--- ## YAML config for hedgehog GUI
+www:
+  default_plot_type           : interactive # static = png plots, interactive = googlevis plots
+  use_plot_caching            : 1           # 1 = true: use cached plots when possible, 0 = false: never use cached plots
+  caching_delay_in_hours      : 1           # if cache=1 then only plots with an end time earlier than this this number of hours ago
+                                            # are cached. More recent plots are not cached as data may still be being imported
+  presentation_delay_in_hours : 0           # number of hours behind now for which the GUI will display data</pre>
+</div></div><p> </p><h3 id="Installationmanual(Hedgehog2.0.0a1)-Configureapache"><span class="nh-number">1.3.4. </span>Configure apache</h3>    <div class="aui-message hint shadowed information-macro">
+                            <span class="aui-icon icon-hint">Icon</span>
+                <div class="message-content">
+                            <p>You will probably need to edit the <em>/etc/apache2/apache2.conf</em> file to enable access to the install directory by adding <em>&lt;Directory &lt;prefix&gt;/share/hedgehog&gt;</em> and <em>&lt;Directory &lt;prefix&gt;/var/hedgehog/www&gt; </em>elements.</p><p>Depending on your configuration you may want to change the name of the <em>hedgehog.conf</em> file or disable the default site using the following command:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="theme: Midnight; brush: bash; gutter: false" style="font-size:12px;">sudo a2dissite 000-default.conf</pre>
+</div></div>
+                    </div>
+    </div>
+<p> </p><ul><li>Add the Hedgehog configuration files to apache and enable the site:</li></ul><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="theme: Midnight; brush: bash; gutter: false" style="font-size:12px;">sudo cp &lt;prefix&gt;/share/hedgehog/conf/hedgehog.conf /etc/apache2/sites-available/
+sudo a2ensite hedgehog.conf</pre>
+</div></div>    <div class="aui-message hint shadowed information-macro">
+                    <p class="title">Uploading XML via webdav using client certificates</p>
+                            <span class="aui-icon icon-hint">Icon</span>
+                <div class="message-content">
+                            <p><span>For installs that </span><strong>want to upload XML via webdav using client certificates</strong><span> then:</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="theme: Midnight; brush: bash; gutter: false" style="font-size:12px;">sudo vi /etc/apache2/conf-available/hedgehog.conf</pre>
+</div></div><p>and uncomment the <em>&quot;Alias /data&quot;</em> line and following directory clause in this file.</p><p><span style="font-size: 14.0px;line-height: 1.4285715;">Alter the apache umask so that www-data group members (i.e. hedgehog) can process the xml files :</span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="theme: Midnight; brush: bash; gutter: false" style="font-size:12px;">sudo vi /etc/apache2/envvars
+# add the line &#39;umask 002&#39; to this file</pre>
+</div></div><p>Clearly you will also need to issue certificates to both Apache and to every collector. Help with this can be found &lt;HERE&gt;</p>
+                    </div>
+    </div>
+    <div class="aui-message hint shadowed information-macro">
+                            <span class="aui-icon icon-hint">Icon</span>
+                <div class="message-content">
+                            <p><span>apache/rapache write some of their logs to user.* so it can be useful to change the syslog config: </span></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="theme: Midnight; brush: bash; gutter: false" style="font-size:12px;">sudo vi /etc/rsyslog.d/50-default.conf</pre>
+</div></div><p>Uncomment the line beginning 'user.*'. </p>
+                    </div>
+    </div>
+<p> </p><ul><li>Finally, restart apache:</li></ul><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="theme: Midnight; brush: bash; gutter: false" style="font-size:12px;">sudo service apache2 restart</pre>
+</div></div><p> </p><h3 id="Installationmanual(Hedgehog2.0.0a1)-Createandpopulatethedatabase"><span class="nh-number">1.3.5. </span>Create and populate the database</h3>    <div class="aui-message hint shadowed information-macro">
+                            <span class="aui-icon icon-hint">Icon</span>
+                <div class="message-content">
+                            <p>For this version of Hedgehog the servers and nodes to be processed and displayed must be specified manually.</p>
+                    </div>
+    </div>
+<p> </p><ul><li>Edit the the <em>&lt;prefix&gt;/etc/hedgehog/nodes.txt</em> to specify the servers, nodes and grouping to be used.<ul><li>Note that the current GUI layout is optimised for nodes with short names (&lt;6 characters) of the same length</li></ul></li><li>Then run the command below noting the following:<ul><li>If you have historic data to import then use the -m flag to specify the month of the oldest data that will need importing. Otherwise the database tables will be created to hold data from this month onwards.</li><li>This script assumes there is a default postgres user called 'postgres' (with no password configured) that has sufficient privileges to create databases and users. <ul><li>If the the default postgres user is not called 'postgres' then use the -u parameter to specify the name of the database user to use to create the Hedgehog database</li><li>If the postgres user requires a password, use the -p flag to be prompted to enter the password.</li></ul></li><li>Note that this script will also create the directory structure for all the specified servers and nodes under the data directory if it does not exist</li></ul></li></ul><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="theme: Midnight; brush: bash; gutter: false" style="font-size:12px;">sudo &lt;prefix&gt;/sbin/hedgehog_database_create.sh</pre>
+</div></div><h3 id="Installationmanual(Hedgehog2.0.0a1)-TesttheHedgehogfrontend"><span class="nh-number">1.3.6. </span>Test the Hedgehog front end</h3><p>At this point you should be able to see the servers and nodes in the web front end at the URL http://&lt;server-name&gt;/hedgehog</p><h1 id="Installationmanual(Hedgehog2.0.0a1)-RunningHedgehog"><span class="nh-number">2. </span>Running Hedgehog</h1><h2 id="Installationmanual(Hedgehog2.0.0a1)-Importdata"><span class="nh-number">2.1. </span>Import data</h2><p>Hedgehog can process data in the following 3 ways:</p><div class="table-wrap"><table class="confluenceTable"><tbody><tr><th class="confluenceTh">Source format</th><th class="confluenceTh">Output format</th><th class="confluenceTh"> </th></tr><tr><td class="confluenceTd">XML</td><td class="confluenceTd">Database</td><td class="confluenceTd">For real time uploads</td></tr><tr><td colspan="1" class="confluenceTd">DAT</td><td colspan="1" class="confluenceTd">Database</td><td colspan="1" class="confluenceTd">For import of historic data</td></tr><tr><td colspan="1" class="confluenceTd">XML</td><td colspan="1" class="confluenceTd">DAT</td><td colspan="1" class="confluenceTd">For backwards compatibility with DSC</td></tr></tbody></table></div><p> </p><p>In each case the <em>&lt;prefix&gt;/bin/refile_and_grok.sh</em> script is used, it is simply given different parameters:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="theme: Midnight; brush: bash; gutter: false" style="font-size:12px;">&gt; refile_and_grok.sh -h
+
+refile_and_grok - finds all input files in teh working directory and processes to output format
+
+-w Working directory to search for input files (default: /usr/local/var/hedgehog/data)
+-i Input file format &lt;XML|DAT&gt; (default: XML)
+-o Output file format &lt;DAT|DB&gt; (default: DB)
+-c Non-interactive mode - use this flag when being run by a cron job
+-s Start date from which to process incoming data (XML input only)
+-r Disable processing of rssac datasets. Default is to process all datasets.
+-R Reserved processors. Number of CPUS processors to exclude from import (default 0).
+-h Show this help.</pre>
+</div></div><p> </p><h3 id="Installationmanual(Hedgehog2.0.0a1)-Importinghistorical.DATdata"><span class="nh-number">2.1.1. </span>Importing historical .DAT data</h3><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="theme: Midnight; brush: bash; gutter: false" style="font-size:12px;">sudo -u hedgehog &lt;prefix&gt;/bin/refile_and_grok.sh -i DAT</pre>
+</div></div><p>Be aware that this can take a long time of there is a significant amount of historic data and it may be advisable to run this in stages.</p><h3 id="Installationmanual(Hedgehog2.0.0a1)-Importingreal-time.XMLdata"><span class="nh-number">2.1.2. </span>Importing real-time .XML data</h3><h4 id="Installationmanual(Hedgehog2.0.0a1)-Manually"><span class="nh-number">2.1.2.1. </span>Manually</h4><ul><li>This can be done manually by running the <em>refile_and_grok.sh</em> script (consider running this nohup as it may take a while depending on how much data there is to process).</li></ul><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="theme: Midnight; brush: bash; gutter: false" style="font-size:12px;">sudo -u hedgehog &lt;prefix&gt;/bin/refile_and_grok.sh </pre>
+</div></div><ul><li>A snapshot of the progress of the data import can be generated by running the command below:</li></ul><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="theme: Midnight; brush: bash; gutter: false" style="font-size:12px;">sudo -u hedgehog &lt;prefix&gt;/bin/hedgehog_import_create_summary.sh</pre>
+</div></div><p> </p><h4 id="Installationmanual(Hedgehog2.0.0a1)-Automatically"><span class="nh-number">2.1.2.2. </span>Automatically</h4><ul><li>Configure a regular cron job for <em>refile_and_grok.sh</em> as shown below</li></ul><h2 id="Installationmanual(Hedgehog2.0.0a1)-Maintenance"><span class="nh-number">2.2. </span>Maintenance</h2><h3 id="Installationmanual(Hedgehog2.0.0a1)-Cronjobs"><span class="nh-number">2.2.1. </span>Cron jobs</h3><p>In 2.0 several cron jobs need to be configured. They should run as the 'hedgehog' system user.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="theme: Midnight; brush: bash; gutter: false" style="font-size:12px;">sudo -u hedgehog crontab -e</pre>
+</div></div><p>Below is an example crontab for a typical system Note that the <em>hedgehog_manage_partitions_cron.sh</em> script <strong>MUST</strong> be configured to run at least once a month.</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="theme: Midnight; brush: bash; gutter: false" style="font-size:12px;"># REQUIRED: 
+# Import XML data every 15 mins
+00,15,30,45 * * * * &lt;prefix&gt;/bin/refile_and_grok.sh -c &gt;&gt; /home/hedgehog/refile_and_grok_xml_to_db.sh.log 2&gt;&amp;1
+# Twice monthly job to make sure the DB tables for next month are created ahead of time
+0 6 15,28 * * &lt;prefix&gt;/bin/hedgehog_manage_partitions.sh &gt;&gt; /home/hedgehog/hedgehog_manage_partitions.sh.log 2&gt;&amp;1
+
+# OPTIONAL: 
+# Daily job to create cached plots for the previous day to make loading common plots quicker. Run a few hours after midnight so all data is uploaded.
+0 4 * * * &lt;prefix&gt;/bin/hedgehog_plotcache_generate_cached_plots.sh -D &gt;&gt; /home/hedgehog/hedgehog_plotcache_generate_cached_plots.sh.log -D 2&gt;&amp;1
+# Daily job to generate RSSAC reports. By default report is generated for a single day 1 week ago
+0 1 * * * &lt;prefix&gt;/bin/hedgehog_rssace_generate_reports.sh -D &gt;&gt; /home/hedgehog/hedgehog_rssac_generate_reports.sh.log 2&gt;&amp;1
+# Monthly job to tar up processed xml directories
+0 2 1 * * &lt;prefix&gt;/bin/hedgehog_datafiles_rm_empty_xml_dirs.sh -D &gt;&gt; /home/hedgehog/hedgehog_datafiles_rm_empty_xml_dirs.sh.log 2&gt;&amp;1
+# Monthly job to remove empty xml directories that are older than 7 days old
+0 2 7 * * &lt;prefix&gt;/bin/hedgehog_datafiles_tar_old_xml.sh -D &gt;&gt; /home/hedgehog/hedgehog_datafiles_tar_old_xml.sh.log 2&gt;&amp;1</pre>
+</div></div>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Aug 27, 2014 09:08</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>
